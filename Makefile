@@ -1,6 +1,6 @@
 ASM=nasm
 CC=gcc
-FLAGS=-m32 -fno-stack-protector -fno-builtin -c
+FLAGS=-g -m32 -fno-stack-protector -fno-builtin -c
 SRC_DIR=src
 BUILD_DIR=build
 
@@ -20,4 +20,4 @@ kernel: $(BUILD_DIR)/boot.obj $(BUILD_DIR)/kernel.obj
 GOOS.iso: GOOS/boot/kernel
 	@grub-mkrescue -o GOOS.iso GOOS/
 run: GOOS.iso
-	@qemu-system-i386 GOOS.iso
+	@qemu-system-i386 GOOS.iso 
