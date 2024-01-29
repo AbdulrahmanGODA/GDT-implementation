@@ -1,6 +1,6 @@
 ASM=nasm
 CC=gcc
-FLAGS=-g -m32 -fno-stack-protector -fno-builtin -c
+FLAGS=-m32 -fno-stack-protector -fno-builtin -c
 SRC_DIR=src
 BUILD_DIR=build
 
