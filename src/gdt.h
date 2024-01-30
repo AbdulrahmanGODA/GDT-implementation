@@ -1,6 +1,7 @@
 #include "stdint.h"
 
-struct gdt_entry_struct{
+    //64-bit long  
+struct gdt_entry_struct{ 
     uint16_t limit;
     uint16_t base_low;
     uint8_t base_middle;
@@ -8,6 +9,9 @@ struct gdt_entry_struct{
     uint8_t limit_flags;
     uint8_t base_high;
 }__attribute__((packed));
+    //48-bit long pointer stored in GDTR
+    // 0 - 15 : limit
+    // 16 - 47 : base address 
 struct gdt_ptr_struct{
     uint16_t limit;
     unsigned int base;
