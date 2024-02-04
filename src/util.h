@@ -1,6 +1,8 @@
 #include "stdint.h"
+
 void memorySet(void* dest, char var, uint32_t);
 void outPortB(uint16_t Port, uint8_t Value);
+char inPortB(uint16_t port);
 
 struct InterruptRegisters{
     uint32_t cr2;
