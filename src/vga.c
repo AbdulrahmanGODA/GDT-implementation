@@ -23,7 +23,7 @@ enum vga_color {
 
 uint16_t buffer[2080];
 
-uint8_t background_color = VGA_COLOR_LIGHT_GREY;
+uint8_t background_color = VGA_COLOR_BLACK;
 
 static inline uint16_t vga_entry(unsigned char uc, uint8_t color);
 size_t strlen(const char* str);
@@ -76,7 +76,7 @@ void terminal_initialize(void){
 void print_terminal_name(){
 	terminal_setcolor(VGA_COLOR_MAGENTA, background_color);
 	terminal_writestring("GO");
-	terminal_setcolor(VGA_COLOR_BLUE, background_color);
+	terminal_setcolor(VGA_COLOR_LIGHT_GREEN, background_color);
 	terminal_writestring("#terminal> ");
 	terminal_setcolor(VGA_COLOR_MAGENTA, background_color);
 }
@@ -141,7 +141,6 @@ void terminal_scroll(void){
 	}
 	terminal_row = 24;
 	terminal_column = 0;
-	//print_terminal_name();
 }
 /*   for(size_t y = 0; y < VGA_HEIGHT; y++) {
       for (size_t x = 0; x < VGA_WIDTH; x++) {
