@@ -1,6 +1,7 @@
 #include "stddef.h"
 #include "stdint.h"
 #include "string.h"
+#include "interpreter.h"
 
 enum vga_color {
 	VGA_COLOR_BLACK = 0,
@@ -95,7 +96,19 @@ void terminal_putchar(char c){
 	case '\n':
 		terminal_row++;
 		terminal_column = 0;
-		print_terminal_name();
+		/* terminal_writestring(interpreter_print());
+		clear_buffer();
+		print_terminal_name(); */
+		if(*interpreter_print() == 'c' && *(interpreter_print()+1) == 'l'){
+			clear_buffer();
+			terminal_initialize();
+		}else{
+			terminal_writestring("Undefined Command");
+			clear_buffer();
+			terminal_row++;
+			terminal_column = 0;
+			print_terminal_name();
+		} 
 		break;
 	case '\b':
 		if(terminal_column != 13) terminal_column--;
@@ -110,6 +123,7 @@ void terminal_putchar(char c){
 		terminal_putentryat(' ', terminal_color, terminal_column, terminal_row);
 		break;
 	default:
+		interpreter(c);
 		terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
 		if(++terminal_column == VGA_WIDTH){
 			terminal_column = 0;
@@ -142,13 +156,3 @@ void terminal_scroll(void){
 	terminal_row = 24;
 	terminal_column = 0;
 }
-/*   for(size_t y = 0; y < VGA_HEIGHT; y++) {
-      for (size_t x = 0; x < VGA_WIDTH; x++) {
-         terminal_buffer[y * VGA_WIDTH + x] = terminal_buffer[(y + 1) * VGA_WIDTH + x];
-        }
-    }
-} */
-
-/* void terminal_update(void) {
-   memcpy(VGA_MEMORY, terminal_buffer);
-} */
